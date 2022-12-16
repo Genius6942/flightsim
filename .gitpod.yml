@@ -1,0 +1,9 @@
+tasks:
+  - name: dev
+    command: npm run dev
+
+ports:
+  - name: dev
+    port: 8080
+    visibility: public
+    onOpen: open-browser

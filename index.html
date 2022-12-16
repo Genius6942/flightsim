@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const erudaScript = document.createElement("script");
+      erudaScript.addEventListener("load", () => {
+        try {
+          eruda.init({
+            defaults: {
+              displaySize: 30,
+              theme: "Atom One Dark",
+              transparency: 1,
+            },
+          });
+          if (localStorage.getItem("eruda-auto-show") === "1") eruda.show();
+          window.addEventListener("keydown", (e) => {
+            const { key, ctrlKey } = e;
+            if (key === "e" && ctrlKey) {
+              e.preventDefault();
+              if (localStorage.getItem("eruda-auto-show") === "1") {
+                localStorage.setItem("eruda-auto-show", "0");
+                eruda.hide();
+              } else {
+                localStorage.setItem("eruda-auto-show", "1");
+                eruda.show();
+              }
+            }
+          });
+        } catch (e) {
+          alert(e);
+        }
+      });
+
+      erudaScript.addEventListener("error", (e) => alert(e.message));
+
+      erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda@2.5.0/eruda.js";
+
+      document.body.appendChild(erudaScript);
+    </script>
+
+    <div
+      class="load-outer"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          width: 75vw;
+          height: 200px;
+          border: 10px solid white;
+          background: black;
+          position: relative;
+        "
+      >
+        <div
+          class="load"
+          style="width: 0%; height: 100%; background: white"
+        ></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

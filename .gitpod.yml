@@ -5,6 +5,6 @@ tasks:
 
 ports:
   - name: dev
-    port: 8080
+    port: 5173
     visibility: public
     onOpen: open-browser
